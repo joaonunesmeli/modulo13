@@ -77,21 +77,25 @@ WHERE m.awards > 3;
 EXPLAIN ANALYZE CREATE TEMPORARY TABLE IF NOT EXISTS movies_tmp AS (SELECT * FROM movies);
 ```
 
-> ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CREATE TEMPORARY TABLE IF NOT EXISTS movies_tmp AS (SELECT * FROM movies)' at line 1
+```
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'CREATE TEMPORARY TABLE IF NOT EXISTS movies_tmp AS (SELECT * FROM movies)' at line 1
+```
 
 ### Exercício 7:
 
 ```
 EXPLAIN ANALYZE DELETE FROM movies_tmp WHERE awards < 5;
 ```
-
-> +----------------------------------------+
-> | EXPLAIN                                |
-> +----------------------------------------+
-> | <not executable by iterator executor>
->  |
-> +----------------------------------------+
-> 1 row in set (0.00 sec)
+ 
+```
++----------------------------------------+
+| EXPLAIN                                |
++----------------------------------------+
+| <not executable by iterator executor>
+|
++----------------------------------------+
+1 row in set (0.00 sec)
+```
 
 ### 11. O que são os índices? Para que servem?
 
@@ -112,11 +116,13 @@ ON movies (title);
 SHOW INDEX FROM movies;
 ```
 
-> +--------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
-> | Table  | Non_unique | Key_name                | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
-> +--------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
-> | movies |          0 | PRIMARY                 |            1 | id          | A         |          21 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
-> | movies |          1 | movies_genre_id_foreign |            1 | genre_id    | A         |           8 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
-> | movies |          1 | movies_title_idx        |            1 | title       | A         |          22 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
-> +--------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
-> 3 rows in set (0.00 sec)
+```
++--------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table  | Non_unique | Key_name                | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++--------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| movies |          0 | PRIMARY                 |            1 | id          | A         |          21 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| movies |          1 | movies_genre_id_foreign |            1 | genre_id    | A         |           8 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
+| movies |          1 | movies_title_idx        |            1 | title       | A         |          22 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
++--------+------------+-------------------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+3 rows in set (0.00 sec)
+```
